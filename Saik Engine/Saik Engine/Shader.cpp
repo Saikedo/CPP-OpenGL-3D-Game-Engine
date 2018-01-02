@@ -68,20 +68,26 @@ Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath)
 	}
 
 	// Shader Program
-	mShaderProgram = glCreateProgram(); //Creates program and returns the ID reference to that program object
-	glAttachShader(this->mShaderProgram, vertexShader);
-	glAttachShader(this->mShaderProgram, fragmentShader);
-	glLinkProgram(this->mShaderProgram);
+	mShaderProgramID = glCreateProgram(); //Creates program and returns the ID reference to that program object
+	glAttachShader(this->mShaderProgramID, vertexShader);
+	glAttachShader(this->mShaderProgramID, fragmentShader);
+	glLinkProgram(this->mShaderProgramID);
 
 	// Print linking errors if any
-	glGetProgramiv(this->mShaderProgram, GL_LINK_STATUS, &success);
+	glGetProgramiv(this->mShaderProgramID, GL_LINK_STATUS, &success);
 	if (!success)
 	{
-		glGetProgramInfoLog(this->mShaderProgram, 512, NULL, infoLog);
+		glGetProgramInfoLog(this->mShaderProgramID, 512, NULL, infoLog);
 		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 	}
 
 	// Delete the shaders as they're linked into our program now and no longer necessery
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+}
+
+
+void Shader::getAllUniformLocations()
+{
+	//mLocationOurColor = glGetUniformLocation(mShaderProgramID, "ourColor");
 }

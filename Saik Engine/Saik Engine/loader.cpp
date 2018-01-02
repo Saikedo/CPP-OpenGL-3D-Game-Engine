@@ -9,12 +9,12 @@ Loader::Loader()
 
 Loader::~Loader()
 {
-	for (auto const& VAO : pVAOvector)
+	for (auto const& VAO : pVAOVector)
 	{
 		glDeleteVertexArrays(1, &VAO);
 	}
 
-	for (auto const& VBO : pVBOvector)
+	for (auto const& VBO : pVBOVector)
 	{
 		glDeleteBuffers(1, &VBO);
 	}
@@ -32,11 +32,12 @@ RawModel Loader::loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint ind
 	GLuint VBO;
 	glGenBuffers(1, &VBO); //Generates buffer on  GPU and returns the I
 
-						   //copy our vertices array in a vertex buffer for OpenGL to use
+	//copy our vertices array in a vertex buffer for OpenGL to use
 	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Binds the Buffer type to provided buffer ID
 	glBufferData(GL_ARRAY_BUFFER, sizeOfVertices, vertices, GL_STATIC_DRAW); //Copies data to GPU
 
-																			 // Generate Element buffer object 
+
+	// Generate Element buffer object 
 	GLuint EBO;
 	glGenBuffers(1, &EBO);
 

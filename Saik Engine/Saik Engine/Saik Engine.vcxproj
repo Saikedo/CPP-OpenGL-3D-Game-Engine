@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Saik\Desktop\GitProjects\C++ OpenGL 3D Game Engine\Saik Engine\libs\glfw\include;C:\Users\Saik\Desktop\GitProjects\C++ OpenGL 3D Game Engine\Saik Engine\libs\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Saik\Desktop\GitProjects\C++ OpenGL 3D Game Engine\Saik Engine\libs\glfw\include;C:\Users\Saik\Desktop\GitProjects\C++ OpenGL 3D Game Engine\Saik Engine\libs\glew\include;C:\Users\Saik\Desktop\GitProjects\C++ OpenGL 3D Game Engine\Saik Engine\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,19 +143,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="loader.cpp" />
+    <ClCompile Include="modelTexture.cpp" />
+    <ClCompile Include="texturedModel.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="loader.h" />
+    <ClInclude Include="modelTexture.h" />
     <ClInclude Include="rawModel.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="texturedModel.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.frag" />
-    <None Include="fragmentShader2.frag" />
     <None Include="vertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

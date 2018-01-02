@@ -6,6 +6,7 @@
 class RawModel
 {
 public:
+	RawModel() {};
 	RawModel(GLuint vaoID, GLuint vertexCount)
 	{
 		mVaoID = vaoID;

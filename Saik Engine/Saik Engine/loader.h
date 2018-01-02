@@ -13,8 +13,10 @@ public:
 
 	RawModel loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndices);
 
+	
 private:
-	std::vector<GLuint> pVAOvector;
-	std::vector<GLuint> pVBOvector;
+	std::vector<GLuint> pVAOVector;
+	std::vector<GLuint> pVBOVector;
+	std::vector<GLuint> pEBOVector;
 };
 

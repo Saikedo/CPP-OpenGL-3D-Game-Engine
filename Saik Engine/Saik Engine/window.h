@@ -13,10 +13,14 @@ public:
 		return window; 
 	};
 
-	int * getWindowDimensions() 
+	int getWindowWidth()
 	{ 
-		int windowDimentsions[2] = { screenWidth,  screenHeight }; 
-		return windowDimentsions;
+		return screenWidth;
+	}
+
+	int getWindowHeight()
+	{
+		return screenHeight;
 	}
 
 	void setGlViewport();

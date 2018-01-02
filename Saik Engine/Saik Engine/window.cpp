@@ -4,16 +4,26 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 Window::Window(const int width, const int height, const char * title)
 {
+	screenWidth = width;
+	screenHeight = height;
+
+
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // CORE_PROFILE uses new openGL stuff, COMPATIBILITY_PROFILE uses comaptibility stuff.
 
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true); // Mainly good for mac`s.
+	#ifdef __APPLE__
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
+	#endif
+
+
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE); // Window resizablility
 
-	window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+	
+
+	window = glfwCreateWindow(screenWidth, screenHeight, title, nullptr, nullptr);
 
 	glfwGetFramebufferSize(window, &screenWidth, &screenHeight); //Size of window relative to density of the screen
 
