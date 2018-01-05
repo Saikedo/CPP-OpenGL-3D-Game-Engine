@@ -21,8 +21,6 @@ Window::Window(const int width, const int height, const char * title)
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE); // Window resizablility
 
-	
-
 	window = glfwCreateWindow(screenWidth, screenHeight, title, nullptr, nullptr);
 
 	glfwGetFramebufferSize(window, &screenWidth, &screenHeight); //Size of window relative to density of the screen
@@ -44,7 +42,6 @@ void  Window::setGlViewport()
 {
 	glViewport(0, 0, screenWidth, screenHeight);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
 }
 
 Window::~Window()
@@ -52,9 +49,17 @@ Window::~Window()
 }
 
 
+void updateWindowSize(GLFWwindow * window)
+{
+	//std::cout << "BEFORE " << screenWidth << " " << screenHeight << std::endl;
+//	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
+	//std::cout << "AFTER " << screenWidth << " " << screenHeight << std::endl;
+}
+
 //Gets called if we resize  the window
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	std::cout << "DISPLAY::framebuffer_size_callback:: Window Resized to " << width << " " << height << std::endl;
+	updateWindowSize(window);
+	//std::cout << "DISPLAY::framebuffer_size_callback:: Window Resized to " << width << " " << height << std::endl;
 	glViewport(0, 0, width, height);
 }

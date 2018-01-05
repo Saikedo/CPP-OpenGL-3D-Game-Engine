@@ -36,6 +36,12 @@
     <ClCompile Include="texturedModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -59,12 +65,24 @@
     <ClInclude Include="texturedModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.frag">
       <Filter>shaders</Filter>
     </None>
     <None Include="vertexShader.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="terrainFragmentShader.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="terrainVertexShader.vert">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

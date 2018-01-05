@@ -8,13 +8,17 @@
 class Loader
 {
 public:
-	Loader();
+	static Loader* getLoaderInstance();
+	
 	~Loader();
 
-	RawModel loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndices);
+	RawModel loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndicesGLfloat, GLfloat textureCoordinates[], GLint sizeofTextureCoordinates);
 
 	
 private:
+	static Loader * instance;
+	Loader();
+
 	std::vector<GLuint> pVAOVector;
 	std::vector<GLuint> pVBOVector;
 	std::vector<GLuint> pEBOVector;

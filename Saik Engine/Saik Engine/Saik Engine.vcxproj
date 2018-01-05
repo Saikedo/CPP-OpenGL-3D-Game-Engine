@@ -142,24 +142,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="modelTexture.cpp" />
+    <ClCompile Include="terrain.cpp" />
     <ClCompile Include="texturedModel.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="modelTexture.h" />
     <ClInclude Include="rawModel.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="terrain.h" />
     <ClInclude Include="texturedModel.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.frag" />
+    <None Include="terrainFragmentShader.frag" />
+    <None Include="terrainVertexShader.vert" />
     <None Include="vertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
