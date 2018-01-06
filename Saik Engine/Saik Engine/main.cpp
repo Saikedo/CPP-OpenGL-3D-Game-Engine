@@ -19,9 +19,13 @@
 #include "texturedModel.h"
 #include "camera.h"
 #include "terrain.h"
+#include "entity.h"
+#include "masterRenderer.h"
+#include "terrainRenderer.h"
+#include "cubeRawModel.h"
 
-const GLint WINDOW_WIDTH = 800;
-const GLint WINDOW_HEIGHT = 600;
+const GLint WINDOW_WIDTH = 1920;
+const GLint WINDOW_HEIGHT = 1080;
 const char * WINDOW_TITLE = "Saik Engine";
 
 
@@ -50,9 +54,6 @@ float lastX = 400, lastY = 300;
 bool firstMouseMovement = true;
 
 
-
-float FOV = 45.0;
-
 int main()
 {
 	Window window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
@@ -74,128 +75,22 @@ int main()
 	//  Hide the cursor and capture it.
 	glfwSetInputMode(window.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	Shader shader("vertexShader.vert", "fragmentShader.frag");
-	shader.getAllUniformLocations();
-
-	Shader terrainShader("terrainVertexShader.vert", "terrainFragmentShader.frag");
-	terrainShader.getAllUniformLocations();
-
-	float vertices[] = {
-		-0.5f, -0.5f, -0.5f, 
-		0.5f, -0.5f, -0.5f, 
-		0.5f,  0.5f, -0.5f, 
-		0.5f,  0.5f, -0.5f, 
-		-0.5f,  0.5f, -0.5f,  
-		-0.5f, -0.5f, -0.5f, 
-
-		-0.5f, -0.5f,  0.5f, 
-		0.5f, -0.5f,  0.5f, 
-		0.5f,  0.5f,  0.5f,  
-		0.5f,  0.5f,  0.5f, 
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f, 
-
-		-0.5f,  0.5f,  0.5f, 
-		-0.5f,  0.5f, -0.5f, 
-		-0.5f, -0.5f, -0.5f, 
-		-0.5f, -0.5f, -0.5f, 
-		-0.5f, -0.5f,  0.5f, 
-		-0.5f,  0.5f,  0.5f, 
-
-		0.5f,  0.5f,  0.5f, 
-		0.5f,  0.5f, -0.5f,
-		0.5f, -0.5f, -0.5f,  
-		0.5f, -0.5f, -0.5f,  
-		0.5f, -0.5f,  0.5f,  
-		0.5f,  0.5f,  0.5f,  
-
-		-0.5f, -0.5f, -0.5f,  
-		0.5f, -0.5f, -0.5f, 
-		0.5f, -0.5f,  0.5f,  
-		0.5f, -0.5f,  0.5f,  
-		-0.5f, -0.5f,  0.5f, 
-		-0.5f, -0.5f, -0.5f, 
-
-		-0.5f,  0.5f, -0.5f, 
-		0.5f,  0.5f, -0.5f, 
-		0.5f,  0.5f,  0.5f, 
-		0.5f,  0.5f,  0.5f,  
-		-0.5f,  0.5f,  0.5f, 
-		-0.5f,  0.5f, -0.5f, 
-	};
-	unsigned int indices[] = {
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
-	};
-
-
-
-	GLfloat textureCoordinates[] = {
-		 0.0f, 0.0f,
-		1.0f, 0.0f,
-		1.0f, 1.0f,
-		1.0f, 1.0f,
-		0.0f, 1.0f,
-		0.0f, 0.0f,
-
-		 0.0f, 0.0f,
-		1.0f, 0.0f,
-		 1.0f, 1.0f,
-		1.0f, 1.0f,
-		 0.0f, 1.0f,
-		0.0f, 0.0f,
-
-		1.0f, 0.0f,
-		1.0f, 1.0f,
-		0.0f, 1.0f,
-		0.0f, 1.0f,
-		0.0f, 0.0f,
-		1.0f, 0.0f,
-
-		 1.0f, 0.0f,
-		1.0f, 1.0f,
-		0.0f, 1.0f,
-		0.0f, 1.0f,
-		0.0f, 0.0f,
-		1.0f, 0.0f,
-
-		0.0f, 1.0f,
-		1.0f, 1.0f,
-		1.0f, 0.0f,
-		1.0f, 0.0f,
-		0.0f, 0.0f,
-		0.0f, 1.0f,
-
-		 0.0f, 1.0f,
-		1.0f, 1.0f,
-		1.0f, 0.0f,
-		1.0f, 0.0f,
-		0.0f, 0.0f,
-		0.0f, 1.0f
-	};
-
-
-	Terrain terrain(0, 0, ModelTexture("db.jpg"));
-
 	
-	RawModel rawModel = Loader::getLoaderInstance()->loadToVAO(vertices, sizeof(vertices), indices, sizeof(indices), textureCoordinates, sizeof(textureCoordinates));
-	ModelTexture modelTexture("container.jpg");
+
+
+	Terrain terrain(0, 0, ModelTexture(Loader::getLoaderInstance()->loadTexture("grass.jpg")));
+
+
+	RawModel rawModel = CubeRawModel::getCubeRawModel();
+	ModelTexture modelTexture(Loader::getLoaderInstance()->loadTexture("container.jpg"));
 	TexturedModel texturedModel(rawModel, modelTexture);
+	Entity entity(texturedModel, glm::vec3(0, 0, 0), 0, 0, 0, 1);
 
+	RawModel rawModel2 = CubeRawModel::getCubeRawModel();
+	ModelTexture modelTexture2(Loader::getLoaderInstance()->loadTexture("db.jpg"));
+	TexturedModel texturedModel2(rawModel2, modelTexture2);
+	Entity entity2(texturedModel2, glm::vec3(0, 0, -5), 0, 0, 0, 2);
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	
-	
-
-
-	shader.start();
-	glUniform1i(glGetUniformLocation(shader.getShaderID(), "texture1"), 0);
-	shader.stop();
-
-	terrainShader.start();
-	glUniform1i(glGetUniformLocation(terrainShader.getShaderID(), "texture1"), 0);
-	terrainShader.stop();
-	///////////////////////////////////////////////////////////////////////////////////////
 
 	glm::vec3 cubePositions[] = {
 		glm::vec3(0.0f,  0.0f,  0.0f),
@@ -214,6 +109,10 @@ int main()
 	glfwSetCursorPosCallback(window.getWindow(), mouse_callback);
 	glfwSetScrollCallback(window.getWindow(), scroll_callback);
 
+
+	MasterRenderer masterRenderer;
+	TerrainRenderer terrainRenderer;
+
 	while (!glfwWindowShouldClose(window.getWindow()))
 	{
 		float currentFrame = glfwGetTime();
@@ -222,79 +121,20 @@ int main()
 
 		processInput(window.getWindow());
 			
-
-		glEnable(GL_DEPTH_TEST);
-
-		glClearColor(0.5f, 0.2f, 0.4f, 1.0f); // background color
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		
-
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Enables wireframe mode
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // Disables wireframe mode
 
 
-		// bind textures on corresponding texture units
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texturedModel.getModelTexture().getTextureID());
-	
 		Camera::getCameraInstance()->update();
 
-		glm::mat4 projection;
-		projection = glm::perspective(glm::radians(FOV), float (window.getWindowWidth()) / (float) (window.getWindowHeight()), 0.1f, 1000.0f);
+		entity2.changeRotation(glm::vec3(0.1f, 0.1f, 0.1f));
 
-		shader.start();
-
-		
-
-		int viewLoc = glGetUniformLocation(shader.getShaderID(), "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(Camera::getCameraInstance()->getCameraView()));
-
-		int projectionLoc = glGetUniformLocation(shader.getShaderID(), "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		masterRenderer.prepareTerrain(terrain);
 
 
-
-
-		glBindVertexArray(texturedModel.getRawModel().getVaoID());
-
-		//glDrawElements(GL_TRIANGLES, rawModel.getVertexCount(), GL_UNSIGNED_INT, 0);
-		for (unsigned int i = 0; i < 10; i++)
-		{
-			glm::mat4 model;
-			model = glm::translate(model, cubePositions[i]);
-			float angle = 20.0f * i;
-			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-			int modelLoc = glGetUniformLocation(shader.getShaderID(), "model");
-			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
-		
-		glBindVertexArray(0);
-		shader.stop();
-		
-
-		terrainShader.start();
-
-		
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(Camera::getCameraInstance()->getCameraView()));
-
-
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-		glm::mat4 model;
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-		int modelLoc = glGetUniformLocation(shader.getShaderID(), "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, terrain.getModelTexture().getTextureID());
-		glBindVertexArray(terrain.getRawModel().getVaoID());
-		glDrawElements(GL_TRIANGLES, terrain.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-		terrainShader.stop();
-
+		masterRenderer.prepareEntity(entity2);
+		masterRenderer.prepareEntity(entity);
+		masterRenderer.render();
 
 
 		glfwPollEvents();
@@ -307,6 +147,7 @@ int main()
 			std::cout << "main: fragmentError: " << err << std::endl;
 		}
 	}
+
 
 	glfwTerminate();
 	return EXIT_SUCCESS;
@@ -330,8 +171,8 @@ void processInput(GLFWwindow *window)
 		Camera::getCameraInstance()->move(RIGHT, deltaTime);
 	if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 		Camera::getCameraInstance()->move(UP, deltaTime);
-	//if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
-	//	Camera::getCameraInstance()->move(DOWN, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+		Camera::getCameraInstance()->move(DOWN, deltaTime);
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -358,10 +199,10 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	if (FOV >= 1.0f && FOV <= 45.0f)
-		FOV -= yoffset;
-	if (FOV <= 1.0f)
-		FOV = 1.0f;
-	if (FOV >= 45.0f)
-		FOV = 45.0f;
+	//if (FOV >= 1.0f && FOV <= 45.0f)
+	//	FOV -= yoffset;
+	//if (FOV <= 1.0f)
+	//	FOV = 1.0f;
+//	if (FOV >= 45.0f)
+	//	FOV = 45.0f;
 }

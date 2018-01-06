@@ -2,8 +2,12 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+Window * Window::instance;
+
 Window::Window(const int width, const int height, const char * title)
 {
+	instance = this;
+
 	screenWidth = width;
 	screenHeight = height;
 

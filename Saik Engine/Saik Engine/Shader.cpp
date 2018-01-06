@@ -85,9 +85,3 @@ Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath)
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 }
-
-
-void Shader::getAllUniformLocations()
-{
-	//mLocationOurColor = glGetUniformLocation(mShaderProgramID, "ourColor");
-}

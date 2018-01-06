@@ -8,7 +8,7 @@ Camera::Camera()
 	WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	Yaw = -90.0f;
 	Pitch = 0.0f;
-	Zoom = 90.0f;
+	Zoom = 45.0f;
 	MovementSpeed = 50.0f;
 	update();
 }
@@ -133,9 +133,11 @@ void Camera::changePitch(float dPitch)
 void Camera::setYaw(float newYaw)
 {
 	Yaw = newYaw;
+
 }
 
 void Camera::changeYaw(float dYaw)
 {
 	Yaw += dYaw;
+
 }

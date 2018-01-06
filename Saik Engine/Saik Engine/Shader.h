@@ -6,14 +6,13 @@
 #include <iostream>
 
 #include <GL/glew.h>
+#include <glm\glm.hpp>
 
 class Shader
 {
 public:
 	// Constructor generates the shader on the fly
 	Shader(const GLchar *vertexPath, const GLchar *fragmentPath);
-
-	void getAllUniformLocations();
 
 
 	// Uses the current shader
@@ -32,17 +31,13 @@ public:
 	}
 
 
-	void setBool(GLuint location, bool value) const
+	void setVec3(const std::string &name, const glm::vec3 &value) const
 	{
-		glUniform1i(location, (int)value);
+		glUniform3fv(glGetUniformLocation(mShaderProgramID, name.c_str()), 1, &value[0]);
 	}
-	void setInt(GLuint location, int value) const
+	void setVec3(const std::string &name, float x, float y, float z) const
 	{
-		glUniform1i(location, value);
-	}
-	void setFloat(GLuint location, float value) const
-	{
-		glUniform1f(location, value);
+		glUniform3f(glGetUniformLocation(mShaderProgramID, name.c_str()), x, y, z);
 	}
 
 private:

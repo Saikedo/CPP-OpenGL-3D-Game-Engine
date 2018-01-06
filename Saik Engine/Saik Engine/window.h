@@ -25,7 +25,10 @@ public:
 
 	void setGlViewport();
 
+	static Window* getWindowInstance() { return instance; }
+
 private:
+	static Window *instance;
 	GLFWwindow *window;
 	int screenWidth;
 	int screenHeight;

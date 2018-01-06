@@ -143,9 +143,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="EntityRenderer.cpp" />
     <ClCompile Include="loader.cpp" />
-    <ClCompile Include="modelTexture.cpp" />
+    <ClCompile Include="masterRenderer.cpp" />
     <ClCompile Include="terrain.cpp" />
+    <ClCompile Include="terrainRenderer.cpp" />
     <ClCompile Include="texturedModel.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="main.cpp" />
@@ -153,11 +156,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="cubeRawModel.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="loader.h" />
+    <ClInclude Include="masterRenderer.h" />
     <ClInclude Include="modelTexture.h" />
     <ClInclude Include="rawModel.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="terrain.h" />
+    <ClInclude Include="terrainRenderer.h" />
     <ClInclude Include="texturedModel.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="Shader.h" />

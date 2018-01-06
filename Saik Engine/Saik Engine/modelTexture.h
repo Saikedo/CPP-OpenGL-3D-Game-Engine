@@ -9,8 +9,8 @@ class ModelTexture
 {
 public:
 	ModelTexture() {};
-	ModelTexture(std::string fileName);
-	~ModelTexture();
+
+	ModelTexture(int textureID) { this->mTextureID = textureID; };
 
 	GLuint getTextureID() { return mTextureID; }
 

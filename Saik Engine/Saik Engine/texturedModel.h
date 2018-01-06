@@ -8,6 +8,7 @@
 class TexturedModel
 {
 public:
+	TexturedModel() {}
 	TexturedModel(RawModel rawModel, ModelTexture modelTexture);
 
 	RawModel getRawModel() { return mRawModel; }

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <GL/glew.h>
-
+#include <string>
 #include "rawModel.h"
 
 
@@ -14,7 +14,8 @@ public:
 
 	RawModel loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndicesGLfloat, GLfloat textureCoordinates[], GLint sizeofTextureCoordinates);
 
-	
+	GLuint loadTexture(std::string filePath);
+
 private:
 	static Loader * instance;
 	Loader();
