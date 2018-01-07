@@ -31,7 +31,7 @@ public:
 	float getMovementSpeed() { return MovementSpeed;}
 	float setMovementSpeed(float newMovementSpeed) { MovementSpeed = newMovementSpeed; }
 	void move(CameraMovement direction, float deltaTime);
-
+	glm::vec3 getPosition() {return Position;}
 	void update();
 
 private:

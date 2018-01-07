@@ -6,6 +6,7 @@
 #include "Shader.h"
 #include "terrainRenderer.h"
 #include "terrain.h"
+#include "light.h"
 
 class MasterRenderer
 {
@@ -15,7 +16,7 @@ public:
 
 	void prepareEntity(Entity entity);
 	void prepareTerrain(Terrain terrain);
-	void render();
+	void render(Light light);
 
 private:
 	std::vector<Entity> entities;

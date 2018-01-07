@@ -6,11 +6,12 @@
 class Terrain
 {
 public:
-	Terrain(int gridX, int gridZ, ModelTexture texture);
+	Terrain(int gridX, int gridZ, ModelTexture texture, float specularStrength);
 	~Terrain();
 
 	RawModel getRawModel() { return model; }
 	ModelTexture getModelTexture() { return texture; }
+	float getSpecularStrength() { return specularStrength; }
 
 private:
 	const float SIZE = 400;
@@ -22,6 +23,8 @@ private:
 	ModelTexture texture;
 
 	RawModel generateTerrain();
+
+	float specularStrength;
 
 
 };

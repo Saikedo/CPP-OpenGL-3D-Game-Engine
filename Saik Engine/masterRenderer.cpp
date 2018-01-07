@@ -42,7 +42,7 @@ MasterRenderer::~MasterRenderer()
 }
 
 
-void MasterRenderer::render()
+void MasterRenderer::render(Light light)
 {
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -52,7 +52,12 @@ void MasterRenderer::render()
 	// Process all entities here
 	entityShader->start();
 	//glUniform1i(glGetUniformLocation(shader.getShaderID(), "texture1"), 0);
-	entityShader->setVec3("ambientLight", 1.0f, 1.0f, 1.0f);
+
+
+	//entityShader->setVec3("ambientLight", 0.1f, 0.1f, 0.1f);
+	//entityShader->setVec3("lightPosition",light.getPosition());
+	//entityShader->setVec3("lightColor", light.getColor());
+	//entityShader->setVec3("viewPosition", Camera::getCameraInstance()->getPosition());
 	// Load view matrix into entity shader
 	glUniformMatrix4fv(glGetUniformLocation(entityShader->getShaderID(), "view"), 1, GL_FALSE, glm::value_ptr(Camera::getCameraInstance()->getCameraView()));
 
@@ -64,7 +69,10 @@ void MasterRenderer::render()
 
 	// Process all terrains here
 	terrainShader->start();
-	terrainShader->setVec3("ambientLight", 1.0f, 1.0f, 1.0f);
+	//terrainShader->setVec3("ambientLight", 0.1f, 0.1f, 0.1f);
+	//terrainShader->setVec3("lightPosition", light.getPosition());
+	//terrainShader->setVec3("lightColor", light.getColor());
+	//terrainShader->setVec3("viewPosition", Camera::getCameraInstance()->getPosition());
 	// Load view matrix into terrain shader
 	glUniformMatrix4fv(glGetUniformLocation(terrainShader->getShaderID(), "view"), 1, GL_FALSE, glm::value_ptr(Camera::getCameraInstance()->getCameraView()));
 

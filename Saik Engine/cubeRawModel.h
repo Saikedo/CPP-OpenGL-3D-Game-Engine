@@ -151,7 +151,8 @@ public:
 		};
 
 
-		return Loader::getLoaderInstance()->loadToVAO(vertices, sizeof(vertices), indices, sizeof(indices), textureCoordinates, sizeof(textureCoordinates));
+		return Loader::getLoaderInstance()->loadToVAO(vertices, sizeof(vertices), indices, sizeof(indices), normals, sizeof(normals),
+			textureCoordinates, sizeof(textureCoordinates));
 	}
 };
 

@@ -2,7 +2,7 @@
 
 
 
-Entity::Entity(TexturedModel texturedModel, glm::vec3 position, float rotX, float rotY, float rotZ, float scale)
+Entity::Entity(TexturedModel texturedModel, glm::vec3 position, float rotX, float rotY, float rotZ, float scale, float specularStrength)
 {
 	this->model = texturedModel;
 	this->position = position;
@@ -10,6 +10,7 @@ Entity::Entity(TexturedModel texturedModel, glm::vec3 position, float rotX, floa
 	this->rotY = rotY;
 	this->rotZ = rotZ;
 	this->scale = scale;
+	this->specularStrength = specularStrength;
 }
 
 

@@ -1,3 +1,10 @@
-﻿  terrainRenderer.cpp
+﻿  main.cpp
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(121): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(185): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(186): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(190): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(191): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(192): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\saik\desktop\gitprojects\cpp-opengl-3d-game-engine\saik engine\main.cpp(193): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Saik Engine.vcxproj -> C:\Users\Saik\Desktop\GitProjects\CPP-OpenGL-3D-Game-Engine\Debug\Saik Engine.exe
   Saik Engine.vcxproj -> C:\Users\Saik\Desktop\GitProjects\CPP-OpenGL-3D-Game-Engine\Debug\Saik Engine.pdb (Partial PDB)

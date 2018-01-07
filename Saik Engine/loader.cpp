@@ -37,7 +37,7 @@ Loader::~Loader()
 }
 
 
-RawModel Loader::loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndices,
+RawModel Loader::loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndices,   GLfloat normals[], GLuint sizeOfNormals,
 	GLfloat textureCoordinates[], GLint sizeofTextureCoordinates)
 {
 	// Generate Vertex Attribute Object
@@ -47,8 +47,9 @@ RawModel Loader::loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint ind
 
 	storeDataInAttributeList(0, 3, vertices, sizeOfVertices);
 
+	storeDataInAttributeList(1, 3, normals, sizeOfNormals);
 
-	storeDataInAttributeList(1, 2, textureCoordinates, sizeofTextureCoordinates);
+	storeDataInAttributeList(2, 2, textureCoordinates, sizeofTextureCoordinates);
 
 
 	// Generate Element buffer object 
@@ -114,18 +115,5 @@ void Loader::storeDataInAttributeList(int attributeNumber, int coordinateSize, f
 	glBufferData(GL_ARRAY_BUFFER, sizeOfData, data, GL_STATIC_DRAW); //Copies data to GPU
 																			 // position attribute
 	glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, GL_FALSE, coordinateSize * sizeof(float), (void*)0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-void  Loader::storeDataInAttributeList(int attributeNumber, int coordinateSize, int data[], int sizeOfData)
-{
-	// Generate Vertex Buffer Object
-	GLuint VBO;
-	glGenBuffers(1, &VBO); //Generates buffer on  GPU and returns the I
-						   //copy our vertices array in a vertex buffer for OpenGL to use
-	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Binds the Buffer type to provided buffer ID
-	glBufferData(GL_ARRAY_BUFFER, sizeOfData, data, GL_STATIC_DRAW); //Copies data to GPU
-																	 // position attribute
-	glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, GL_FALSE, coordinateSize * sizeof(int), (void*)0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

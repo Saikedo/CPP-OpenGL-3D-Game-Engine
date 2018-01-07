@@ -23,6 +23,7 @@
 #include "masterRenderer.h"
 #include "terrainRenderer.h"
 #include "cubeRawModel.h"
+#include "light.h"
 
 const GLint WINDOW_WIDTH = 1920;
 const GLint WINDOW_HEIGHT = 1080;
@@ -78,18 +79,18 @@ int main()
 	
 
 
-	Terrain terrain(0, 0, ModelTexture(Loader::getLoaderInstance()->loadTexture("grass.jpg")));
+	Terrain terrain(0, 0, ModelTexture(Loader::getLoaderInstance()->loadTexture("grass.jpg")), 0);
 
 
 	RawModel rawModel = CubeRawModel::getCubeRawModel();
-	ModelTexture modelTexture(Loader::getLoaderInstance()->loadTexture("container.jpg"));
+	ModelTexture modelTexture(Loader::getLoaderInstance()->loadTexture("orange.jpg"));
 	TexturedModel texturedModel(rawModel, modelTexture);
-	Entity entity(texturedModel, glm::vec3(0, 0, 0), 0, 0, 0, 1);
+	Entity entity(texturedModel, glm::vec3(5, 2, 5), 0, 0, 0, 1, 256);
 
 	RawModel rawModel2 = CubeRawModel::getCubeRawModel();
 	ModelTexture modelTexture2(Loader::getLoaderInstance()->loadTexture("db.jpg"));
 	TexturedModel texturedModel2(rawModel2, modelTexture2);
-	Entity entity2(texturedModel2, glm::vec3(0, 0, -5), 0, 0, 0, 2);
+	Entity entity2(texturedModel2, glm::vec3(0, 0, -5), 0, 0, 0, 2, 256);
 
 
 	glm::vec3 cubePositions[] = {
@@ -113,6 +114,8 @@ int main()
 	MasterRenderer masterRenderer;
 	TerrainRenderer terrainRenderer;
 
+	Light light(glm::vec3(0.0f, 5.0f, 10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
 	while (!glfwWindowShouldClose(window.getWindow()))
 	{
 		float currentFrame = glfwGetTime();
@@ -128,13 +131,13 @@ int main()
 		Camera::getCameraInstance()->update();
 
 		entity2.changeRotation(glm::vec3(0.1f, 0.1f, 0.1f));
-
+		entity.changeRotation(glm::vec3(0.0f, 0.1f, 0.0f));
 		masterRenderer.prepareTerrain(terrain);
 
-
+		masterRenderer.prepareEntity(light.getEntity());
 		masterRenderer.prepareEntity(entity2);
 		masterRenderer.prepareEntity(entity);
-		masterRenderer.render();
+		masterRenderer.render(light);
 
 
 		glfwPollEvents();

@@ -2,11 +2,12 @@
 
 
 
-Terrain::Terrain(int gridX, int gridZ, ModelTexture texture)
+Terrain::Terrain(int gridX, int gridZ, ModelTexture texture, float specularStrength)
 {
 	this->texture = texture;
 	x = gridX * SIZE;
 	z = gridZ  * SIZE;
+	this->specularStrength = specularStrength;
 	model = generateTerrain();
 }
 
@@ -20,6 +21,7 @@ RawModel Terrain::generateTerrain()
 {
 	int count = VERTEX_COUNT * VERTEX_COUNT;
 	float *vertices = new float[count * 3];
+	float *normals = new float[count * 3];
 	float *textureCoordinates = new float[count * 2];
 	GLuint *indices = new  GLuint[6 * (VERTEX_COUNT - 1)*(VERTEX_COUNT - 1)];
 
@@ -29,6 +31,10 @@ RawModel Terrain::generateTerrain()
 			vertices[vertexPointer * 3] = (float)j / ((float)VERTEX_COUNT - 1) * SIZE;
 			vertices[vertexPointer * 3 + 1] = 0;
 			vertices[vertexPointer * 3 + 2] = (float)i / ((float)VERTEX_COUNT - 1) * SIZE;
+
+			normals[vertexPointer * 3] = 0;
+			normals[vertexPointer * 3 + 1] = 1;
+			normals[vertexPointer * 3 + 2] = 0;
 			
 			textureCoordinates[vertexPointer * 2] = (float)j / ((float)VERTEX_COUNT - 1);
 			textureCoordinates[vertexPointer * 2 + 1] = (float)i / ((float)VERTEX_COUNT - 1);
@@ -53,5 +59,5 @@ RawModel Terrain::generateTerrain()
 	}
 
 	return Loader::getLoaderInstance()->loadToVAO(vertices, sizeof(float) * (count * 3), indices, sizeof(int) * (6 * (VERTEX_COUNT - 1)*(VERTEX_COUNT - 1)),
-		textureCoordinates, sizeof(float) * (count * 2));
+		normals, sizeof(normals) * (count * 3), textureCoordinates, sizeof(float) * (count * 2));
 }

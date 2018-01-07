@@ -12,7 +12,8 @@ public:
 	
 	~Loader();
 
-	RawModel loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndicesGLfloat, GLfloat textureCoordinates[], GLint sizeofTextureCoordinates);
+	RawModel loadToVAO(GLfloat vertices[], GLuint sizeOfVertices, GLuint indices[], GLuint sizeOfIndicesGLfloat, GLfloat normals[], GLuint sizeOfNormals,
+		GLfloat textureCoordinates[], GLint sizeofTextureCoordinates);
 
 	GLuint loadTexture(std::string filePath);
 
@@ -25,6 +26,5 @@ private:
 	std::vector<GLuint> pEBOVector;
 
 	void storeDataInAttributeList(int attributeNumber, int coordinateSize, float data[], int sizeOfData);
-	void storeDataInAttributeList(int attributeNumber, int coordinateSize, int data[], int sizeOfData);
 };
 

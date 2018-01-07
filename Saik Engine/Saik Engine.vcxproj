@@ -145,6 +145,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="EntityRenderer.cpp" />
+    <ClCompile Include="light.cpp" />
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="masterRenderer.cpp" />
     <ClCompile Include="terrain.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="cubeRawModel.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="EntityRenderer.h" />
+    <ClInclude Include="light.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="masterRenderer.h" />
     <ClInclude Include="modelTexture.h" />

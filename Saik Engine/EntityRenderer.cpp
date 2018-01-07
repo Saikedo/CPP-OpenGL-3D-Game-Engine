@@ -29,6 +29,7 @@ void EntityRenderer::Render(std::vector<Entity> entities, Shader *shader)
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
 
 		// Create and load model matrix into shader
 		glm::mat4 model;
@@ -39,12 +40,16 @@ void EntityRenderer::Render(std::vector<Entity> entities, Shader *shader)
 		model = glm::scale(model, glm::vec3(entity.getScale(), entity.getScale(), entity.getScale()));
 		int modelLoc = glGetUniformLocation(shader->getShaderID(), "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+		shader->setFloat("specularStrength", entity.getSpecularStrength());
+
 		// Draw
 		//glDrawElements(GL_TRIANGLES, rawModel.getVertexCount(), GL_UNSIGNED_INT, 0);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
 
 		glBindVertexArray(0);
 	}

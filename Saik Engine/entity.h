@@ -6,7 +6,8 @@
 class Entity
 {
 public:
-	Entity(TexturedModel texturedModel, glm::vec3 position, float rotX, float rotY, float rotZ, float scale);
+	Entity() {};
+	Entity(TexturedModel texturedModel, glm::vec3 position, float rotX, float rotY, float rotZ, float scale, float specularStrength);
 
 	~Entity();
 
@@ -19,6 +20,7 @@ public:
 	glm::vec3 getPosition() { return position; }
 	glm::vec3 getRotation() { return glm::vec3(rotX, rotY, rotZ);}
 	float getScale() { return scale; }
+	float getSpecularStrength() {return specularStrength;}
 
 
 	void changePosition(glm::vec3 dPosition) { position += dPosition;  }
@@ -34,5 +36,6 @@ private:
 	glm::vec3 position;
 	float rotX, rotY, rotZ;
 	float scale;
+	float specularStrength;
 };
 
